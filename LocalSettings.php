@@ -144,6 +144,16 @@ $wgFileExtensions[] = 'gpg';
 $wgFileExtensions[] = 'asc';
 $wgFileExtensions[] = 'json';
 $wgFileExtensions[] = 'mp3';
+$wgFileExtensions[] = 'tiff';
+$wgFileExtensions[] = 'xcf';
+$wgFileExtensions[] = 'mid';
+$wgFileExtensions[] = 'ogg';
+$wgFileExtensions[] = 'ogv';
+$wgFileExtensions[] = 'djvu';
+$wgFileExtensions[] = 'oga';
+$wgFileExtensions[] = 'flac';
+$wgFileExtensions[] = 'wav';
+$wgFileExtensions[] = 'webm';
 
 require_once "$IP/extensions/ImageMap/ImageMap.php";
 #require_once("$IP/extensions/CSS/CSS.php");
