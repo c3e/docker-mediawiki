@@ -1,8 +1,12 @@
 Wiki des c3e.
 
-docker + archi + nginx + mediawiki
+technologies:
+* docker
+* arch
+* nginx
+* mediawiki
 
-Plugin:
-ImageMap
-ConfirmEdit
-ParserFunctions
+mediawiki plugins:
+* ImageMap
+* ConfirmEdit
+* ParserFunctions
