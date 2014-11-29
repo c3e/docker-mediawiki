@@ -27,6 +27,7 @@ run mkdir /data
 add LocalSettings.php /usr/share/webapps/mediawiki/LocalSettings.php
 run rm -rf /usr/share/webapps/mediawiki/images
 #run ln -s /data/images /usr/share/webapps/mediawiki/images
+add favicon.ico /usr/share/webapps/mediawiki/favicon.ico
 
 
 #download plugins
