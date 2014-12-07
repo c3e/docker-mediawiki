@@ -154,6 +154,7 @@ $wgFileExtensions[] = 'oga';
 $wgFileExtensions[] = 'flac';
 $wgFileExtensions[] = 'wav';
 $wgFileExtensions[] = 'webm';
+$wgFileExtensions[] = 'ods';
 
 require_once "$IP/extensions/ImageMap/ImageMap.php";
 #require_once("$IP/extensions/CSS/CSS.php");
