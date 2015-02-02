@@ -162,7 +162,17 @@ require_once "$IP/extensions/ParserFunctions/ParserFunctions.php";
 #require_once "$IP/extensions/DynamicPageList/DynamicPageList.php";
 
 require_once "$IP/extensions/ConfirmEdit/ConfirmEdit.php";
-require_once "$IP/extensions/ConfirmEdit/ReCaptcha.php";
-$wgCaptchaClass = 'ReCaptcha';
-$wgReCaptchaPublicKey = 'PUBLIC KEY';
-$wgReCaptchaPrivateKey = 'PRIVATE KEY';
+require_once "$IP/extensions/ConfirmEdit/QuestyCaptcha.php";
+#require_once "$IP/extensions/ConfirmEdit/ReCaptcha.php";
+#$wgCaptchaClass = 'ReCaptcha';
+#$wgReCaptchaPublicKey = 'PUBLIC KEY';
+#$wgReCaptchaPrivateKey = 'PRIVATE KEY';
+$wgCaptchaClass = 'QuestyCaptcha';
+$arr = array (
+        'Welche Farbe haben Matekisten?' => 'gelb',
+        'An welchem Tag ist Chaostreff?' => array('mittwoch', 'mittwochs'),
+        'In welcher Stadt ist der Chaospott?' => 'essen'
+);
+foreach ( $arr as $key => $value ) {
+        $wgCaptchaQuestions[] = array( 'question' => $key, 'answer' => $value );
+}
