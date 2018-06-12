@@ -1,9 +1,8 @@
-from base/arch
+from base/archlinux
 
-#install this shit!
-run pacman -Sy
-run pacman -Sq --noconfirm --noprogressbar nginx php php-fpm php-gd php-xcache php-pear php-intl mediawiki imagemagick supervisor gcc-libs libpng
-
+#install
+run pacman -Syyu
+run pacman -Sq --noconfirm --noprogressbar coreutils nginx php php-fpm php-gd php-intl mediawiki imagemagick supervisor gcc-libs libpng unzip wget
 
 #config files
 add supervisor_nginx.ini /etc/supervisor.d/nginx.ini
@@ -15,30 +14,24 @@ add nginx.conf /etc/nginx/nginx.conf
 run sed -i 's/nodaemon=false/nodaemon=true/' /etc/supervisord.conf
 
 #prepare php.ini
-run sed -i 's/;extension=gd.so/extension=gd.so/' /etc/php/php.ini
-run sed -i 's/;extension=intl.so/extension=intl.so/' /etc/php/php.ini
-run sed -i 's/;extension=mysqli.so/extension=mysqli.so/' /etc/php/php.ini
-run sed -i 's/;extension=xcache.so/extension=xcache.so/' /etc/php/php.ini
-
+run sed -i 's/;extension=gd/extension=gd/' /etc/php/php.ini
+run sed -i 's/;extension=intl/extension=intl/' /etc/php/php.ini
+run sed -i 's/;extension=mysqli/extension=mysqli/' /etc/php/php.ini
+run sed -i 's/;extension=xcache/extension=xcache/' /etc/php/php.ini
+run sed -i 's/;extension=iconv/extension=iconv/' /etc/php/php.ini
+run sed -i 's/upload_max_filesize = 2M/upload_max_filesize = 10M/' /etc/php/php.ini
+run sed -i 's/post_max_size = 8M/post_max_size = 10M/' /etc/php/php.ini
 
 #working data
-run mkdir /data
-#run ln -s /data/LocalSettings.php /usr/share/webapps/mediawiki/LocalSettings.php
-add LocalSettings.php /usr/share/webapps/mediawiki/LocalSettings.php
 run rm -rf /usr/share/webapps/mediawiki/images
-#run ln -s /data/images /usr/share/webapps/mediawiki/images
 add favicon.ico /usr/share/webapps/mediawiki/favicon.ico
 
-
 #download plugins
-add https://extdist.wmflabs.org/dist/ConfirmEdit-REL1_23-486d6eb.tar.gz /src/ConfirmEdit.tar.gz
-add https://extdist.wmflabs.org/dist/ImageMap-REL1_23-1f17b01.tar.gz /src/ImageMap.tar.gz
-add https://extdist.wmflabs.org/dist/ParserFunctions-REL1_23-e4a11db.tar.gz /src/ParserFunctions.tar.gz
+ADD extension_dl /usr/local/bin/
 
-run tar -xzf /src/ConfirmEdit.tar.gz -C /usr/share/webapps/mediawiki/extensions
-run tar -xzf /src/ImageMap.tar.gz -C /usr/share/webapps/mediawiki/extensions 
-run tar -xzf /src/ParserFunctions.tar.gz -C /usr/share/webapps/mediawiki/extensions
-
+RUN extension_dl ConfirmEdit
+RUN extension_dl ImageMap
+RUN extension_dl ParserFunctions
 
 expose 80
-cmd "/usr/bin/supervisord -c /etc/supervisord.conf"
+cmd ["/usr/bin/supervisord", "-c", "/etc/supervisord.conf"]

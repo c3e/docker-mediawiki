@@ -1,0 +1,8 @@
+#!/bin/bash
+
+WIKI_VERSION=$(pacman -Q mediawiki | awk '{ print $2 }' | cut -d . -f 1-2 | tr . _)
+
+wget -O /extension.zip https://github.com/wikimedia/mediawiki-extensions-$1/archive/REL$WIKI_VERSION.zip
+unzip /extension.zip -d /tmp/
+mv /tmp/mediawiki-extensions-$1-REL$WIKI_VERSION /usr/share/webapps/mediawiki/extensions/$1
+
